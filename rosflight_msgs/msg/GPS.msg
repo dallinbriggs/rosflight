@@ -1,9 +1,18 @@
 Header header
-bool fix
-int16 NumSat
-float64 latitude # Deg
-float64 longitude # Deg
-float64 altitude # m
-float64 speed # m/s
-float64 ground_course # rad
-float64 covariance # m
+int8 num_sat
+uint32 fix_type
+int32 cno
+float64 latitude
+float64 longitude
+float64 altitude
+float32 hMSL
+float32 hAcc
+float32 vAcc
+float32 pDop
+geometry_msgs/Vector3 linear_velocity
+float32 ground_speed_2d
+float32 ground_speed_3d
+float32 sAcc
+float32 course
+float32 cAcc
+uint32 messages_per_second
