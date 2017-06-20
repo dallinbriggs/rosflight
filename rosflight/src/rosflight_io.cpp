@@ -352,7 +352,7 @@ void rosflightIO::handle_attitude_quaternion_msg(const mavlink_message_t &msg)
   attitude_msg.angular_velocity.z = attitude.yawspeed;
 
   geometry_msgs::Vector3Stamped euler_msg;
-  euler_msg.header.stamp = mavrosflight_->time.get_ros_time_ms(attitude.time_boot_ms);
+  euler_msg.header.stamp = attitude_msg.header.stamp;
   tf::Quaternion quat(attitude.q2, attitude.q3, attitude.q4, attitude.q1);
   tf::Matrix3x3(quat).getEulerYPR(euler_msg.vector.z, euler_msg.vector.y, euler_msg.vector.x);
 
@@ -365,7 +365,7 @@ void rosflightIO::handle_attitude_quaternion_msg(const mavlink_message_t &msg)
   }
   if (euler_pub_.getTopic().empty())
   {
-    euler_pub_ = nh_.advertise<geometry_msgs::Vector3Stamped>("attitude/euler", 1);
+    euler_pub_ = nh_.advertise<geometry_msgs::Vector3Stamped>("attitude_euler", 1);
   }
   attitude_pub_.publish(attitude_msg);
   euler_pub_.publish(euler_msg);
